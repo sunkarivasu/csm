@@ -36,7 +36,7 @@ jobs:
 
                   cd /home/ubuntu/app/csm/ &&
                   git fetch --all &&
-                  get pull --all &&
+                  git pull --all &&
                   git checkout staging &&
                   git pull origin staging &&
                   sh build.sh &&

@@ -40,5 +40,6 @@ jobs:
                   git checkout staging &&
                   git pull origin staging &&
                   sh build.sh &&
-                  echo "Deployed to Staging Successfully"
+                  echo "Deployed to Staging Successfully" &&
+                  pm2 restart all
                   '

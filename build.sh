@@ -11,8 +11,6 @@ else
     exit 1
 fi
 
-exit 0
-
 # Check Node is installed
 if ! command -v node &> /dev/null
 then

@@ -39,7 +39,7 @@ jobs:
                   git pull --all &&
                   git checkout staging &&
                   git pull origin staging &&
-                  sh build.sh &&
+                  bash build.sh &&
                   echo "Deployed to Staging Successfully" &&
                   pm2 restart all
                   '

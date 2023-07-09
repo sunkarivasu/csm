@@ -197,10 +197,10 @@ npm start
             "moduleResolution": "node",
             "sourceMap": true,
             "outDir": "./dist",
-            "rootDir": ".",
+            "rootDir": "./src",
             "baseUrl": "./"
         },
-        "include": ["src/**/*.ts", "server.ts"],
+        "include": ["src/**/*.ts"],
         "exclude": ["node_modules/**/*", "dist"]
     }
     ```

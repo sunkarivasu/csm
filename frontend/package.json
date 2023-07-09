@@ -4,8 +4,8 @@
   "description": "csm is a grocery delivery app",
   "source": "index.html",
   "scripts": {
-    "start": "parcel",
-    "build": "parcel build"
+    "start": "npx parcel",
+    "build": "npx parcel build"
   },
   "repository": {
     "type": "git",
@@ -31,5 +31,16 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
+  },
+  "engines": {
+    "node": ">=18.13.0",
+    "npm": ">=8.19.0"
+  },
+  "targets": {
+    "default": {
+      "engines": {
+        "browsers": ">= 50%"
+      }
+    }
   }
 }

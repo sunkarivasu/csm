@@ -1,7 +1,7 @@
 {
     "scripts": {
         "start": "npm start --prefix backend",
-        "build": "sh build.sh",
+        "build": "bash build.sh",
         "backend": "npm start --prefix backend",
         "dev-backend": "npm run dev --prefix backend",
         "frontend": "npm start --prefix frontend"

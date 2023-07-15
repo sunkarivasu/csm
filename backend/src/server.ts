@@ -40,4 +40,4 @@ app.get('*', (req: IRequest, res: IResponse) => {
 });
 
 // Server
-app.listen(PORT, () => logger.info(`[server] Server running @${PORT}`));
+app.listen(PORT, () => logger.info(`Server running @${PORT}`));

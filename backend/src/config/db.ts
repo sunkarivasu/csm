@@ -17,9 +17,9 @@ const config = (): void => {
     }
 
     mongoose.connect(MONGO_URI)
-        .then(() => logger.info(`[server][mongoDB][${MONGO_ENV}] Database connected successfully`))
+        .then(() => logger.info(`[mongoDB][${MONGO_ENV}] Database connected successfully`))
         .catch(err => {
-            logger.error(`[server][mongoDB][${MONGO_ENV}] Database connection failed :: ${err}`);
+            logger.error(`[mongoDB][${MONGO_ENV}] Database connection failed :: ${err}`);
             setTimeout(() => process.exit(1), 1);
         });
 };

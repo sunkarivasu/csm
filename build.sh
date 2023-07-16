@@ -54,6 +54,22 @@ if [ ! -d "data/logs" ]; then
     mkdir -p data/logs
 fi
 
+if [ ! -f "data/logs/build.log" ]; then
+    touch data/logs/build.log 
+fi
+
+if [ ! -d "data/logs/requests.log" ]; then
+    touch data/logs/requests.log 
+fi
+
+if [ ! -d "data/logs/errors.log" ]; then
+    touch data/logs/errors.log 
+fi
+
+if [ ! -d "data/logs/info.log" ]; then
+    touch data/logs/info.log 
+fi
+
 # install dependencies
 date >> data/build.log &&
 echo -e "\x1b[93mInstalling frontend node_modules\x1b[0m" &&
@@ -78,9 +94,21 @@ fi
 # - For backend, we use tsc to build (node-express-typescript)
 echo -e "\x1b[0;93mBuilding Project...\x1b[0m" &&
 npm run build --prefix frontend >> data/build.log &&
+if [[ $? -ne 0 ]]; then
+    echo -e "\x1b[0;91mFailed to build project, Check build.log for more info\x1b[0m" &&
+    echo -e "\x1b[0;93mRolling back changes...\x1b[0m" &&
+    bash build-rollback.sh &&
+    exit 1
+fi
 npm run build --prefix backend >> data/build.log &&
+if [[ $? -ne 0 ]]; then
+    echo -e "\x1b[0;91mFailed to build project, Check build.log for more info\x1b[0m" &&
+    echo -e "\x1b[0;93mRolling back changes...\x1b[0m" &&
+    bash build-rollback.sh &&
+    exit 1
+fi
 
 # Copy frontend build to backend
 mkdir backend/dist/public &&
 cp -r frontend/dist/* backend/dist/public/ &&
-echo -e "\x1b[0;93mBuild Complete, run npm start\x1b[0m"
+echo -e "\x1b[0;93mBuild Completed\x1b[0m"

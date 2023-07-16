@@ -10,7 +10,7 @@ const config = (): void => {
 
     if (process.env.NODE_ENV !== 'production') {
         MONGO_URI = process.env.MONGO_URI_DEV ? process.env.MONGO_URI_DEV : 'mongodb://127.0.0.1:27017/csm';
-        MONGO_ENV = process.env.MONGO_ENV_DEV ? process.env.MONGO_ENV_DEV : '';
+        MONGO_ENV = process.env.MONGO_URI_DEV ? (process.env.MONGO_ENV_DEV ? process.env.MONGO_ENV_DEV : '') : 'local';
     } else {
         MONGO_URI = process.env.MONGO_URI_PROD ? process.env.MONGO_URI_PROD : '';
         MONGO_ENV = process.env.MONGO_ENV_PROD ? process.env.MONGO_ENV_PROD : '';

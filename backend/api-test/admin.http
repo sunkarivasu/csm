@@ -1,8 +1,51 @@
-POST http://127.0.0.1:3333/api/admin/register HTTP/1.1
-Content-Type: application/json
+@BASE_URL=http://127.0.01:3333/api
+@TOKEN=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YjQxMGI0YzZjMGFkMjdkODhmNDEwZiIsIm5hbWUiOiJEaGFtYXJlc2h3YXJha3VtYXIiLCJlbWFpbCI6ImRoYW1hcmVzaHdhcmt1bWFyQGdtYWlsLmNvbSIsImFsbG93X3Bhc3N3b3JkX2NoYW5nZSI6dHJ1ZSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjg5NTIzNTkxLCJleHAiOjE2ODk2MDk5OTF9.GVXav161ruqHrkdcx6hbm2z6IqMYCrvehv5rSN0QyVA
+@HTTP_VERSION=HTTP/1.1
 
-{
-    "name": "test",
-    "email": "test@csm-rajam.tech",
-    "password": "test@123"
-}
+# # Admin Registration
+# POST http://127.0.0.1:3333/api/admin/register HTTP/1.1
+# Content-Type: application/json
+# Authorization: {{TOKEN}}
+
+# {
+#     "name": "Dhamareshwarakumar",
+#     "email": "dhamareshwarkumar@gmail.com",
+#     "allow_password_change": true
+# }
+
+# # Admin Login
+# POST {{BASE_URL}}/admin/login {{HTTP_VERSION}}
+# Content-Type: application/json
+
+# {
+#     "email": "dhamareshwarkumar@gmail.com",
+#     "password": "**********"
+# }
+
+# # Update Admin Password
+# POST {{BASE_URL}}/admin/update-password {{HTTP_VERSION}}
+# Content-Type: application/json
+# Authorization: {{TOKEN}}
+
+# {
+#     "password": "**********"
+# }
+
+# # Admin Forgot Password
+# POST {{BASE_URL}}/admin/forgot-password {{HTTP_VERSION}}
+# Content-Type: application/json
+
+# {
+#     "email": "dhamareshwarkumar@gmail.com"
+# }
+
+# # Admin Reset Password
+# POST {{BASE_URL}}/admin/reset-password {{HTTP_VERSION}}
+# Content-Type: application/json
+
+# {
+#     "email": "dhamareshwarkumar@gmail.com",
+#     "password": "**********",
+#     "otp_hash": "f4c2c773683420d4d5bd3a619c553ba626970e2f0b346ef93ad81f8a73b79928.1689528438164",
+#     "otp": "779757"
+# }

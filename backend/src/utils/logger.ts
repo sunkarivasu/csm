@@ -2,8 +2,8 @@ import fs from 'fs';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const output = fs.createWriteStream('src/logs/info.log', { flags: 'a' });
-const errorOutput = fs.createWriteStream('src/logs/error.log', { flags: 'a' });
+const output = fs.createWriteStream('src/../../data/logs/info.log', { flags: 'a' });
+const errorOutput = fs.createWriteStream('src/../../data/logs/errors.log', { flags: 'a' });
 
 const terminalLogging: boolean = process.env.TERMINAL_LOGGING ? process.env.TERMINAL_LOGGING === 'true' ? true : false : true;
 const fileLogging: boolean = process.env.FILE_LOGGING ? process.env.FILE_LOGGING === 'true' ? true : false : true;
@@ -32,12 +32,12 @@ const log = (msg: any, color: keyof IColorMap, suffixMsg: string): void => {
         const msgStr: string = JSON.stringify(msg, null, 4);
         const lines = msgStr.split('\n');
         lines.forEach(line => {
-            if (terminalLogging) terminalLogger.log(`${colorMap[color]} ${suffixMsg} ${line} ${colorMap.reset}`);
-            if (fileLogging) fileLogger.info(`[${new Date().toLocaleString('en-US', { hour12: false, timeZone: timezone })}][${color}] ${suffixMsg} ${line}`);
+            if (terminalLogging) terminalLogger.log(`${colorMap[color]}${suffixMsg} ${line} ${colorMap.reset}`);
+            if (fileLogging) fileLogger.info(`[${new Date().toLocaleString('en-US', { hour12: false, timeZone: timezone })}]${suffixMsg} ${line}`);
         });
     } else {
-        if (terminalLogging) terminalLogger.log(`${colorMap[color]} ${suffixMsg} ${msg} ${colorMap.reset}`);
-        if (fileLogging) fileLogger.info(`[${new Date().toLocaleString('en-US', { hour12: false, timeZone: timezone })}][${color}] ${suffixMsg} ${msg}`);
+        if (terminalLogging) terminalLogger.log(`${colorMap[color]}${suffixMsg}${/^\[.*\].*/.test(msg) ? '' : ' '}${msg} ${colorMap.reset}`);
+        if (fileLogging) fileLogger.info(`[${new Date().toLocaleString('en-US', { hour12: false, timeZone: timezone })}]${suffixMsg}${msg[0] === '[' ? '' : ' '}${msg}`);
     }
 }
 

@@ -3,8 +3,11 @@ const app = express();
 import dotenv from 'dotenv';
 import cors from 'cors';
 import path from 'path';
+import passport from 'passport';
 import db from './config/db';
 import logger from './utils/logger';
+import reqLogger from './middleware/reqLogger';
+import passportJwt from './config/passport-jwt';
 
 // @types
 import { IRequest, IResponse } from 'src/interfaces/vendor';
@@ -16,11 +19,13 @@ import { admin } from './routes';
 // Middlewares
 app.use(cors());
 app.use(express.json());
-
+app.use(reqLogger);
+app.use(passport.initialize());
 
 // Configuration
 dotenv.config();
 db();
+passportJwt(passport);
 
 
 // Constants
@@ -40,4 +45,4 @@ app.get('*', (req: IRequest, res: IResponse) => {
 });
 
 // Server
-app.listen(PORT, () => logger.info(`[server] Server running @${PORT}`));
+app.listen(PORT, () => logger.info(`Server running @${PORT}`));

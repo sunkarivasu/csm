@@ -10,16 +10,16 @@ const config = (): void => {
 
     if (process.env.NODE_ENV !== 'production') {
         MONGO_URI = process.env.MONGO_URI_DEV ? process.env.MONGO_URI_DEV : 'mongodb://127.0.0.1:27017/csm';
-        MONGO_ENV = process.env.MONGO_ENV_DEV ? process.env.MONGO_ENV_DEV : '';
+        MONGO_ENV = process.env.MONGO_URI_DEV ? (process.env.MONGO_ENV_DEV ? process.env.MONGO_ENV_DEV : '') : 'local';
     } else {
         MONGO_URI = process.env.MONGO_URI_PROD ? process.env.MONGO_URI_PROD : '';
         MONGO_ENV = process.env.MONGO_ENV_PROD ? process.env.MONGO_ENV_PROD : '';
     }
 
     mongoose.connect(MONGO_URI)
-        .then(() => logger.info(`[server][mongoDB][${MONGO_ENV}] Database connected successfully`))
+        .then(() => logger.info(`[mongoDB][${MONGO_ENV}] Database connected successfully`))
         .catch(err => {
-            logger.error(`[server][mongoDB][${MONGO_ENV}] Database connection failed :: ${err}`);
+            logger.error(`[mongoDB][${MONGO_ENV}] Database connection failed :: ${err}`);
             setTimeout(() => process.exit(1), 1);
         });
 };

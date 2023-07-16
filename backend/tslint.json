@@ -11,7 +11,8 @@
         "no-console": [
             true,
             "warning"
-        ]
+        ],
+        "no-shadowed-variable": false
     },
     "rulesDirectory": []
 }

@@ -9,21 +9,33 @@ const adminSchema = new Schema<IAdminSchema, TAdminModel, IAdminMethods>({
     name: {
         type: String,
         trim: true,
-        required: true,
-        maxlength: 32,
-        minlength: 3
+        required: [true, 'Name is required'],
+        maxlength: [32, 'Name cannot be more than 32 characters'],
+        minlength: [3, 'Name must be at least 3 characters long']
     },
     email: {
         type: String,
         trim: true,
-        required: true,
         unique: true,
-        maxlength: 255,
-        minlength: 7
+        required: [true, 'Email is required'],
+        maxlength: [255, 'Email cannot be more than 255 characters'],
+        minlength: [7, 'Email must be at least 7 characters long'],
     },
     hashed_password: {
         type: String,
-        required: true
+        required: [true, 'Password is required']
+    },
+    allow_password_change: {
+        type: Boolean,
+        default: false
+    },
+    role: {
+        type: String,
+        enum: {
+            values: ['super_admin', 'admin'],
+            message: '{VALUE} is not identified'
+        },
+        default: 'admin'
     },
     salt: {
         type: String,
